@@ -13,7 +13,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       WP Quizr
- * Plugin URI:        http://example.com/plugin-name-uri/
+ * Plugin URI:        https://wordpress.org/plugins/wp-quizr/
  * Description:       Create Buzzfeed-style quizzes and allow users to share their results on social media.
  * Version:           1.0.0
  * Author:            Amir Canteetu
