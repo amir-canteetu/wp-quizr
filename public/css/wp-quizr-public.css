@@ -14,7 +14,7 @@ and open the template in the editor.
 }
 
 .quiz-form {
-    width: 535px;
+    width: 625px;
     margin: 60px auto 20px auto;
 }
 .quiz-table-listing {
@@ -46,7 +46,7 @@ and open the template in the editor.
     margin: 60px auto 20px auto;
 }
 .quiz-result-container {
-    width: 535px;
+    width: 625px;
     margin: 30px auto 30px auto;
       border: 1px solid #dddddd;
 }
@@ -76,7 +76,7 @@ and open the template in the editor.
 .quiz-result-container .share-your-results-container p {
     text-transform: uppercase;
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     margin: 20px 0 15px 0;
     padding: 0;
     letter-spacing: 1px;
@@ -210,36 +210,32 @@ margin: 10px 0 15px 0;
     right: 64px;
 }
 .quiz-img {
-    width: 240px;
-    height: 240px;
     vertical-align: middle;
+   
 }
 .quiz-img-contain {
-    border: 1px solid #a0a0a0;
+background-color: #f2f2f2;
+border: 1px solid #d8d8d8;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 7px;
     cursor: pointer;
 }
+
+.quiz-img-contain:hover {
+background-color: #fff195;
+}
 .quiz-item-selected {
     cursor: pointer;
-    border: 8px solid #333;
+    border: 8px solid #8ac5ff;
     padding: 0;
-
+background-color: #8ac5ff;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.quiz-item-hover {
-    cursor: pointer;
-    border: 8px solid #dbdbdb;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
 .quiz-item-disabled {
     opacity: 0.4;
 }
@@ -301,7 +297,7 @@ margin: 10px 0 15px 0;
 }
 #take-the-quiz span {
     display: inline-block;
-    width: 100%;
+    
     text-align: center;
     margin-bottom: 3px;
 }
@@ -434,4 +430,38 @@ float: left;
 
 span.quiz-title {
     font-size: 24px;
+}
+
+#buzz_sub_buzz .quiz .quiz_question.image .quiz-answer .quiz_checkbox_wrp .quiz-checkbox {
+  width: 29px;
+  height: auto;
+  border: none;
+  background: none;
+  margin: 0;
+}
+
+span.quiz_checkbox {
+  height: 29px !important;
+  width: 29px !important;
+  border: none;
+  background: none;
+  margin: 0;
+  float: left;
+    
+}
+
+span.quiz-checkbox_unchecked {
+    background: url(../images/unchecked.png) no-repeat;
+}
+
+span.quiz-checkbox_checked {
+    background: url(../images/checked.png) no-repeat;
+}
+
+span.quiz_answer_text {
+    width: 80%;
+}
+
+div.quiz_checkbox_wrp {
+    margin-top: 10px; 
 }
