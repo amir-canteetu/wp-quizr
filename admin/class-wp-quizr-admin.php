@@ -177,25 +177,22 @@ class WP_Quizr_Admin {
         public function wp_quizr_meta_boxes_setup() {
 
             $wp_quizr_options = get_option('wp_quizr_options');
-
+            
             /*Check if app IDs have been submitted; if so, show metaboxes*/
-            if ($wp_quizr_options['option_fb_id'] || $wp_quizr_options['option_twtr_handle']) {
+            if (!($wp_quizr_options['option_fb_id']) && !($wp_quizr_options['option_twtr_handle'])) {
 
+            /* If no social id given, remind user to submit them. */
+            add_action('add_meta_boxes_wp_quizr', array( $this, 'wp_quizr_remind_about_social_IDs')); 
+            
+            }
+            
             /* Add meta boxes on the 'add_meta_boxes' hook. */
             add_action('add_meta_boxes_wp_quizr', array( $this, 'wp_quizr_add_number_of_outcomes_and_questions_meta_boxes'));
 
             /* Save post meta on the 'save_post' hook. */
             add_action('save_post', array( $this, 'wp_quizr_save_meta_info'), 10, 2);        
 
-            } else {
-
-            /* If no social id given, remind user to submit them. */
-            add_action('add_meta_boxes_wp_quizr', array( $this, 'wp_quizr_remind_about_social_IDs'));        
-
-            }
-
         }
-
 
         /**
          * Create meta boxes to be displayed on the quiz editor screen.
@@ -499,14 +496,12 @@ class WP_Quizr_Admin {
                     /* Get the saved meta values, if any. */
                     $wp_quizr_saved_question_outcome_image_url_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url', true);
 
-
                     /* If a new meta value was added, add it. */
                     if ($new_wp_quizr_question_outcome_image_url) {
 
                         update_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url', $new_wp_quizr_question_outcome_image_url);
 
                     }
-
 
                     /* If a there's no meta value delete the one in the database. */
                     if ($new_wp_quizr_question_outcome_image_url == '') {
@@ -515,7 +510,47 @@ class WP_Quizr_Admin {
 
                     }
 
+                    $new_wp_quizr_question_outcome_image_caption = ( (isset($_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption']) && (is_string($_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption']))) ? $_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption'] : '' );
 
+                    /* Get the saved meta values, if any. */
+                    $wp_quizr_saved_question_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption', true);                    
+
+                    /* If a new meta value was added, add it. */
+                    if ($new_wp_quizr_question_outcome_image_caption) {
+
+                        update_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption', $new_wp_quizr_question_outcome_image_caption);
+
+                    }
+
+                    /* If a there's no meta value delete the one in the database. */
+                    if ($new_wp_quizr_question_outcome_image_caption == '') {
+
+                        delete_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption');
+
+                    }
+                    
+                    
+
+                    $new_wp_quizr_question_no_outcome_image_caption = ( (isset($_POST['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption']) && (is_string($_POST['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption']))) ? $_POST['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption'] : '' );
+
+                    /* Get the saved meta values, if any. */
+                    $wp_quizr_saved_question_no_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption', true);                    
+
+                    /* If a new meta value was added, add it. */
+                    if ($new_wp_quizr_question_no_outcome_image_caption) {
+
+                        update_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption', $new_wp_quizr_question_no_outcome_image_caption);
+
+                    }
+
+                    /* If a there's no meta value delete the one in the database. */
+                    if ($new_wp_quizr_question_no_outcome_image_caption == '') {
+
+                        delete_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption');
+
+                    }
+                    
+                    
                     $new_wp_quizr_no_outcome_image_url = ( (isset($_POST['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url']) && (is_string($_POST['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url']))) ? $_POST['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url'] : '' );
 
                     $wp_quizr_saved_no_outcome_image_url = get_post_meta($post->ID, 'wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url', true);
