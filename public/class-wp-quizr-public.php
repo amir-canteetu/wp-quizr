@@ -154,6 +154,9 @@ class WP_Quizr_Public {
 
                     $wp_quizr_saved_no_outcome_image_url = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url', true);
 
+                    $wp_quizr_saved_question_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption', true);
+                    
+                    $wp_quizr_saved_question_no_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption', true);
 
                     if ($wp_quizr_saved_question_outcome_image_url_meta_value) {
 
@@ -169,7 +172,7 @@ class WP_Quizr_Public {
 
                         $quiz_content .= '<img src="' . $wp_quizr_saved_question_outcome_image_url_meta_value . '" class="quiz-img">';
 
-                        $quiz_content .= '</div>';
+                        $quiz_content .= '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_outcome_image_caption_meta_value .'</span></span></div>';
 
                         $quiz_content .= '</td>';
 
@@ -197,7 +200,7 @@ class WP_Quizr_Public {
 
                         $quiz_content .= '<img src="' . $wp_quizr_saved_no_outcome_image_url . '" class="quiz-img">';
 
-                        $quiz_content .= '</div>';
+                        $quiz_content .= '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_no_outcome_image_caption_meta_value .'</span></span></div>';
 
                         $quiz_content .= '</td>';
 
@@ -347,6 +350,5 @@ class WP_Quizr_Public {
             }
 
         }        
-        
 
 }
