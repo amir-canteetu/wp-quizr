@@ -18,13 +18,9 @@
 
                     results.push(answer);
 
-                    $(this).removeClass('quiz-item-hover');
+                    $(this).removeClass('quiz-item-hover notselected quiz-img-contain').addClass('quiz-item-selected').parent().parent().parent().find(".notselected").addClass('quiz-item-disabled');
 
-                    $(this).addClass('quiz-item-selected');
-
-                    $(this).removeClass('notselected');
-
-                    $(this).parent().parent().parent().find(".notselected").addClass('quiz-item-disabled');
+                    $(this).find(".quiz_checkbox").removeClass('quiz-checkbox_unchecked').addClass('quiz-checkbox_checked');                    
 
                     if(remaining_questions > 0) {
 
@@ -115,7 +111,6 @@
                 });
             });
 
-
             $(function() {
 
                 $('.fb-share').click(function() {
@@ -136,18 +131,6 @@
 
             });
 
-            $(function() {
-
-                $('#take-quiz-again-link').click(function() {
-
-                    location.reload();
-
-                });
-
-            });            
-            
-            
-            
 	  });
 
 })( jQuery );
