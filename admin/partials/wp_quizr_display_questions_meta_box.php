@@ -23,6 +23,11 @@
                 <br />
                 <br />
                 <input type="button" class ="wp_quizr_question_outcome_remove_img_button" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_remove_img_button'; ?>" class="button" value="Remove Image" />
+                <br />
+                <br />                
+                <input class="widefat" type="text" name="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_image_caption'; ?>" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_image_caption'; ?>" placeholder="Image Caption" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_outcome_' . $y . '_image_caption', true)) ? esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_outcome_' . $y . '_image_caption', true)) : ''; ?>" size="30">                
+                <br />
+                <br />              
             </p> 
             <?php
         }
@@ -47,6 +52,11 @@
                     <br>
                     <br>
                     <input type="button" class="wp_quizr_question_outcome_remove_img_button" value="Remove Image">
+                    <br />
+                    <br />                     
+                    <input class="widefat" type="text" name="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_' . $y . '_image_caption'; ?>" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_' . $y . '_image_caption'; ?>" placeholder="Image Caption" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_' . $y . '_image_caption', true)) ? esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_' . $y . '_image_caption', true)) : ''; ?>" size="30">                
+                    <br />
+                    <br />                      
                 </p> 
 
                 <?php
