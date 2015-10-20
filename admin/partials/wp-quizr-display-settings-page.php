@@ -23,7 +23,19 @@
                 <th scope="row">Twitter Handle</th>
                 <td><input type="text" name="wp_quizr_options[option_twtr_handle]" value="<?php echo esc_attr($wp_quizr_options['option_twtr_handle']); ?>" />
                 </td>
-            </tr>               
+            </tr>
+            
+            <tr valign="top">
+                <th scope="row">Quiz Table Width</th>
+                <td><input type="text" name="wp_quizr_options[option_table_width]" value="<?php echo esc_attr($wp_quizr_options['option_table_width']); ?>" placeholder="625px" />
+                </td>
+            </tr>
+            
+            <tr valign="top">
+                <th scope="row">Randomize Quiz Answer Choices?</th>
+                <td><input type="checkbox" name="wp_quizr_options[random]" value="1"<?php echo ($wp_quizr_options['random'] == 1)? 'checked="checked"': ''; ?>/></td>
+            </tr> 
+            
             <tr valign="top">
                 <th scope="row">Custom CSS Styles</th>
                 <td><textarea rows="4" cols="50" name="wp_quizr_options[option_custom_css]"><?php echo esc_attr($wp_quizr_options['option_custom_css']); ?> </textarea>
@@ -37,6 +49,8 @@
         </p>
 
     </form>
+    
+    <p>If you like WP Quizr, please leave a <a target="_blank" href="https://wordpress.org/plugins/wp-quizr/">rating</a>. A huge thank you in advance.</p>
 
 </div>
 
