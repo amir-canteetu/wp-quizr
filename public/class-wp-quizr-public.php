@@ -57,7 +57,7 @@ class WP_Quizr_Public {
                 /* Load only if custom type "wp_quizr" is being viewed */  
                 if (has_shortcode($post->post_content, 'wp_quizr')) {
 
-                    wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-quizr-public.css', array(), $this->version, 'all' );
+                    wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-quizr-public.min.css', array(), $this->version, 'all' );
 
                 }
                 
@@ -75,7 +75,7 @@ class WP_Quizr_Public {
                 /* Load only if custom type "wp_quizr" is being viewed */  
                 if (has_shortcode($post->post_content, 'wp_quizr')) {
 
-                    wp_enqueue_script( 'wp_quizr_js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-public.js', array( 'jquery' ), $this->version, false );
+                    wp_enqueue_script( 'wp_quizr_js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-public.min.js', array( 'jquery' ), $this->version, false );
 
                     /* Get current page protocol */
                     $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
@@ -111,20 +111,26 @@ class WP_Quizr_Public {
             extract(shortcode_atts(array(), $atts));
 
             $post_id = $atts['id'];
+            
+            $number_of_columns =  is_numeric($atts['columns']) ? $atts['columns'] : 2;
 
             $quiz_title = get_the_title( $post_id );
 
             $wp_quizr_options = get_option('wp_quizr_options');
+            
+            $table_width = $wp_quizr_options['option_table_width']? $wp_quizr_options['option_table_width'] : '625px';
 
             $number_of_outcomes_titles_input = esc_attr(get_post_meta($post_id, 'number_of_outcomes_titles_input', true));
 
             $number_of_question_titles_input = esc_attr(get_post_meta($post_id, 'number_of_question_titles_input', true));
 
             //store the post's ID in the form so we can use it later for Ajax request               
-            $quiz_content = '<form id = "take-the-quiz" data-id="' . $post_id . '" class="quiz-form" name="wp_quizr_form" method = "post">';
+            $quiz_content = '<form id = "take-the-quiz" data-id="' . $post_id . '" class="quiz-form" name="wp_quizr_form" method = "post" style="width:' .$table_width.'">';
 
 
             for ($x = 1; $x <= $number_of_question_titles_input; $x++) {
+                
+                $wp_quizr_cell_array = array();
 
                 $img_url_array = array();
 
@@ -142,11 +148,9 @@ class WP_Quizr_Public {
                     //if question image exists, show it
                     if($wp_quizr_question_title_image_url) {
 
-                        $quiz_content .= '<tr><td colspan="2"><img src="'. $wp_quizr_question_title_image_url .'" class="question_title_image"></td></tr>';
+                        $quiz_content .= '<tr><td colspan="'. $number_of_columns .'"><img src="'. $wp_quizr_question_title_image_url .'" class="question_title_image"></td></tr>';
 
                     }
-
-                $count = 1;
 
                 for ($y = 1; $y <= $number_of_outcomes_titles_input; $y++) {
 
@@ -157,63 +161,35 @@ class WP_Quizr_Public {
                     $wp_quizr_saved_question_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption', true);
                     
                     $wp_quizr_saved_question_no_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption', true);
-
+                    
                     if ($wp_quizr_saved_question_outcome_image_url_meta_value) {
 
-                        if (($count % 2 !== 0)) {
+                        $wp_quizr_cell_array[] = '<td>' . '<div class="quiz-img-contain notselected" data-id="' . $y . '">' . '<img src="' . $wp_quizr_saved_question_outcome_image_url_meta_value . '" class="quiz-img">' . '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_outcome_image_caption_meta_value .'</span></span></div>' . '</td>';
 
-                            $quiz_content .= '<tr>';
-
-                        }
-
-                        $quiz_content .= '<td>';
-
-                        $quiz_content .= '<div class="quiz-img-contain notselected" data-id="' . $y . '">';
-
-                        $quiz_content .= '<img src="' . $wp_quizr_saved_question_outcome_image_url_meta_value . '" class="quiz-img">';
-
-                        $quiz_content .= '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_outcome_image_caption_meta_value .'</span></span></div>';
-
-                        $quiz_content .= '</td>';
-
-                        if (($count % 2 == 0)) {
-
-                            $quiz_content .= '</tr>';
-
-                        }
-
-                        $count++;
                     }
 
                     if ($wp_quizr_saved_no_outcome_image_url) {
 
-                        if (($count % 2 !== 0)) {
-
-                            $quiz_content .= '<tr>';
-
-                        }
-
-
-                        $quiz_content .= '<td>';
-
-                        $quiz_content .= '<div class="quiz-img-contain notselected">';
-
-                        $quiz_content .= '<img src="' . $wp_quizr_saved_no_outcome_image_url . '" class="quiz-img">';
-
-                        $quiz_content .= '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_no_outcome_image_caption_meta_value .'</span></span></div>';
-
-                        $quiz_content .= '</td>';
-
-                        if (($count % 2 == 0)) {
-
-                            $quiz_content .= '</tr>';
-
-                        }
-
-                        $count++;
+                        $wp_quizr_cell_array[]  = '<td>' . '<div class="quiz-img-contain notselected">' . '<img src="' . $wp_quizr_saved_no_outcome_image_url . '" class="quiz-img">' . '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_no_outcome_image_caption_meta_value .'</span></span></div>' . '</td>';
 
                     }
 
+                }
+                
+                if($wp_quizr_options['random'] == true) {
+                    
+                    shuffle ( $wp_quizr_cell_array );
+                    
+                }
+                
+                for($i=0; $i < count($wp_quizr_cell_array); $i++) {
+                    
+                    $quiz_content .= ($i==0 || ($i % $number_of_columns == 0))? '<tr>' : '';
+                    
+                    $quiz_content .= $wp_quizr_cell_array[$i]; 
+                    
+                    $quiz_content .= ($i==($number_of_columns-1) || $i==count($wp_quizr_cell_array))? '</tr>' : '';
+                    
                 }
 
                 $quiz_content .= '</tbody></table>';
@@ -224,7 +200,7 @@ class WP_Quizr_Public {
 
             $quiz_content .= '<div id="ajax-loader" class="hide"></div>';
 
-            $quiz_content .= '<div class="quiz-result-container hide">';
+            $quiz_content .= '<div class="quiz-result-container hide" style="width:' .$table_width.'">';
 
             $quiz_content .= '<p class="quiz-title"><span class="quiz-title">'. $quiz_title .'</span></p>';        
 
@@ -250,25 +226,9 @@ class WP_Quizr_Public {
 
             $quiz_content .= '<div id="share-buttons">';
 
-            $quiz_content .= '<a  class="fb-share" href="#">
+            $quiz_content .= '<a  class="fb-share" href="#"><i class="fa fa-facebook"></i><span>SHARE</span>                            </a>';
 
-                            <div class="fb-contain">
-
-                            <img src="' . plugin_dir_url( __FILE__ ) . 'images/fb-quiz.jpg' . '">
-
-                            </div>
-
-                            </a>';
-
-            $quiz_content .= '<a href="#" class="twitter-share">
-
-                                <div class="twitter-contain">
-                                
-                                    <img src="' . plugin_dir_url( __FILE__ ) . 'images/twitter-quiz.jpg' . '">
-                                        
-                                </div>
-                                
-                              </a>
+            $quiz_content .= '<a href="#" class="twitter-share"><i class="fa fa-twitter"></i><span>TWEET</span></a>
                               
                             </div>
                             

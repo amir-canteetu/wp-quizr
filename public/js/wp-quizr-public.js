@@ -3,7 +3,6 @@
 
         $(function() {
             
-            
             var results = [],
 
             number_of_questions = $('.quiz-question').length,

@@ -14,7 +14,6 @@ and open the template in the editor.
 }
 
 .quiz-form {
-    width: 625px;
     margin: 60px auto 20px auto;
 }
 .quiz-table-listing {
@@ -69,7 +68,7 @@ and open the template in the editor.
 .quiz-result-container .share-your-results-container {
     
     border-top: 1px solid #cfcfcf;
-
+padding-bottom: 35px;
     display: inline-block;
     width: 100%;
 }
@@ -90,6 +89,7 @@ p.quiz-title {
 .quiz-result-container #share-buttons {
     text-align: center;
     margin: 10px auto 30px auto;
+    width: 620px;
 }
 
 #share-buttons a {
@@ -465,3 +465,82 @@ span.quiz_answer_text {
 div.quiz_checkbox_wrp {
     margin-top: 10px; 
 }
+
+#share-buttons a img {
+    display: inline;
+}
+
+#share-buttons a  {
+    width: 200px;
+    height: 45px;
+    display: block;
+    padding-top: 3px;
+}
+
+#share-buttons a:hover  {
+
+    text-decoration: none;
+  opacity: .75;
+}
+
+#share-buttons a  span{
+    font-size: 18px;
+  color: #fff;
+  letter-spacing: 3px;
+  border-radius: 1px;
+  text-transform: uppercase;
+  line-height: 40px;
+  text-align: center;
+}
+
+a.fb-share {
+    float: left;
+    background-color: #3b5998;
+      margin-left: 17%;
+}
+
+a.twitter-share {
+    float: right;
+      background-color: #55acee;
+        margin-right: 17%;
+}
+
+
+
+/*!
+ *  Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.4.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 17px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+}
+.fa-twitter-square:before {
+  content: "\f081";
+}
+.fa-facebook-square:before {
+  content: "\f082";
+}
+
+.fa-twitter:before {
+  content: "\f099";
+}
+.fa-facebook-f:before,
+.fa-facebook:before {
+  content: "\f09a";
+}
+
