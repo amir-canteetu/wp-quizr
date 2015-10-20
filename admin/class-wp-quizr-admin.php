@@ -82,11 +82,11 @@ class WP_Quizr_Admin {
 
             if ('wp_quizr' === $post_type) {
 
-            wp_enqueue_script( 'wp-quizr-admin-js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-admin.js', array( 'jquery' ), $this->version, false );
+            wp_enqueue_script( 'wp-quizr-admin-js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-admin.min.js', array( 'jquery' ), $this->version, false );
 
             wp_enqueue_media();
 
-            wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.js', array( 'jquery' ), $this->version, false );
+            wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.min.js', array( 'jquery' ), $this->version, false );
 
             wp_localize_script('meta-box-image_script', 'meta_image', array(
                     'title' => 'Choose or Upload an Image',
@@ -163,6 +163,10 @@ class WP_Quizr_Admin {
             $input['option_twtr_handle'] = sanitize_text_field($input['option_twtr_handle']);
 
             $input['option_custom_css'] = sanitize_text_field($input['option_custom_css']);
+            
+            $input['option_table_width'] = sanitize_text_field($input['option_table_width']);
+            
+            $input['random'] = sanitize_text_field($input['random']);
 
             return $input;
 
@@ -341,7 +345,7 @@ class WP_Quizr_Admin {
 
 
             /* Process and save/update outcomes titles info. */
-            $number_of_outcomes = esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_outcomes', true));
+            $number_of_outcomes = get_post_meta($post->ID, 'wp_quizr_number_of_outcomes', true);
 
 
             $number_of_outcomes_titles_input = 0;
@@ -376,7 +380,7 @@ class WP_Quizr_Admin {
 
             /* Process and save/update question titles info. */
 
-            $number_of_questions = esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_questions', true));
+            $number_of_questions = get_post_meta($post->ID, 'wp_quizr_number_of_questions', true);
 
 
             $number_of_question_titles_input = 0;
@@ -482,10 +486,10 @@ class WP_Quizr_Admin {
 
             /* Process and save/update questions & answer image asssociation info. */
 
-            $number_of_question_titles_input = esc_attr(get_post_meta($post->ID, 'number_of_question_titles_input', true));
+            $number_of_question_titles_input = get_post_meta($post->ID, 'number_of_question_titles_input', true);
 
             /* Get the saved # of outcomes titles. */
-            $number_of_outcomes_titles_input = esc_attr(get_post_meta($post->ID, 'number_of_outcomes_titles_input', true));
+            $number_of_outcomes_titles_input = get_post_meta($post->ID, 'number_of_outcomes_titles_input', true);
 
             for ($x = 1; $x <= $number_of_question_titles_input; $x++) {
 
