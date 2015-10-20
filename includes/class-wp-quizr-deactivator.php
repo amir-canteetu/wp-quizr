@@ -21,6 +21,8 @@ class Plugin_Name_Deactivator {
 	 */
 	public static function deactivate() {
 
+            delete_option( 'wp_quizr_options' );
+            
 	}
 
 }
