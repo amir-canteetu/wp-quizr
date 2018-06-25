@@ -2,9 +2,9 @@
 Contributors: amir_canteetu
 Tags: quiz, quizzes, buzzfeed quiz, viral, viral quiz
 Requires at least: 3.0.1
-Tested up to: 4.3
+Tested up to: 4.9.6
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J78732V5VULA6
-Stable tag: 1.0.5
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,19 @@ Yes the quiz can be included in a post or page by pasting in its shortcode on th
 5. Users can share their results on social media networks.
 
 == Changelog ==
+
+= 1.2.0 =
+
+* css changes to make quiz table responsive
+
+*security enhancements
+
+* php 7+ ready
+
+* refactored code
+
+* cms ux enhancements
+
 
 = 1.0.5 =
 

@@ -21,7 +21,7 @@ class Plugin_Name_Activator {
 	 */
 	public static function activate() {
       
-            add_option( 'wp_quizr_options', array('option_table_width' =>'635px',
+            add_option( 'wp_quizr_options', array('option_table_width' =>'100',
                                                             'random' => true) );
 
 	}

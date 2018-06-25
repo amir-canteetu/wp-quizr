@@ -53,13 +53,15 @@ class WP_Quizr_Public {
 	public function enqueue_styles() {
 
                 global $post;
+                
+                if( is_object( $post ) ):
+                    /* Load only if custom type "wp_quizr" is being viewed */  
+                    if (has_shortcode($post->post_content, 'wp_quizr')) {
 
-                /* Load only if custom type "wp_quizr" is being viewed */  
-                if (has_shortcode($post->post_content, 'wp_quizr')) {
+                        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-quizr-public.css', array(), $this->version, 'all' );
 
-                    wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-quizr-public.min.css', array(), $this->version, 'all' );
-
-                }
+                    }                    
+                endif;
                 
 	}
 
@@ -71,21 +73,28 @@ class WP_Quizr_Public {
 	public function enqueue_scripts() {
                 
                 global $post;
+                
+                if( is_object( $post ) ):
+                    
+                    /* Load only if custom type "wp_quizr" is being viewed */  
+                    if (has_shortcode($post->post_content, 'wp_quizr')) {
 
-                /* Load only if custom type "wp_quizr" is being viewed */  
-                if (has_shortcode($post->post_content, 'wp_quizr')) {
+                        wp_enqueue_script( 'wp_quizr_js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-public.js', array( 'jquery' ), $this->version, false );
 
-                    wp_enqueue_script( 'wp_quizr_js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-public.min.js', array( 'jquery' ), $this->version, false );
+                        /* Get current page protocol */
+                        $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
 
-                    /* Get current page protocol */
-                    $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+                        /* Output admin-ajax.php URL with same protocol as current page */
+                        $params = array();
+                        
+                        $params['ajaxurl']  = admin_url('admin-ajax.php', $protocol);
+                        $params['security'] = wp_create_nonce("ajax_security_nonce");
 
-                    /* Output admin-ajax.php URL with same protocol as current page */
-                    $params = array('ajaxurl' => admin_url('admin-ajax.php', $protocol));
+                        wp_localize_script('wp_quizr_js', 'wp_quizr_js_data', $params);
 
-                    wp_localize_script('wp_quizr_js', 'wp_quizr_js_data', $params);
-
-                }
+                    }  
+                    
+                endif;
                 
 	}
         
@@ -110,29 +119,19 @@ class WP_Quizr_Public {
 
             extract(shortcode_atts(array(), $atts));
 
-            $post_id = $atts['id'];
-            
-            $number_of_columns =  is_numeric($atts['columns']) ? $atts['columns'] : 2;
-
-            $quiz_title = get_the_title( $post_id );
-
-            $wp_quizr_options = get_option('wp_quizr_options');
-            
-            $table_width = $wp_quizr_options['option_table_width']? $wp_quizr_options['option_table_width'] : '625px';
-
-            $number_of_outcomes_titles_input = esc_attr(get_post_meta($post_id, 'number_of_outcomes_titles_input', true));
-
-            $number_of_question_titles_input = esc_attr(get_post_meta($post_id, 'number_of_question_titles_input', true));
-
+            $post_id                            = $atts['id'];
+            $number_of_columns                  =  is_numeric($atts['columns']) ? $atts['columns'] : 2;
+            $quiz_title                         = get_the_title( $post_id );
+            $wp_quizr_options                   = get_option('wp_quizr_options');
+            $table_width                        = $wp_quizr_options['option_table_width'] ? $wp_quizr_options['option_table_width']  : '100';
+            $number_of_outcomes_titles_input    = esc_attr(get_post_meta($post_id, 'number_of_outcomes_titles_input', true));
+            $number_of_question_titles_input    = esc_attr(get_post_meta($post_id, 'number_of_question_titles_input', true));
             //store the post's ID in the form so we can use it later for Ajax request               
-            $quiz_content = '<form id = "take-the-quiz" data-id="' . $post_id . '" class="quiz-form" name="wp_quizr_form" method = "post" style="width:' .$table_width.'">';
-
+            $quiz_content                       = '<form id = "take-the-quiz" data-id="' . $post_id . '" class="quiz-form" name="wp_quizr_form" method = "post" style="width:' .$table_width.'%">';
 
             for ($x = 1; $x <= $number_of_question_titles_input; $x++) {
                 
                 $wp_quizr_cell_array = array();
-
-                $img_url_array = array();
 
                 $question_title = get_post_meta($post_id, 'wp_quizr_question_title_' . $x . '', true);
 
@@ -246,21 +245,20 @@ class WP_Quizr_Public {
         *   @since 1.0.0
         */      
         public function wp_quizr_ajax() {
+            
+            check_ajax_referer( 'ajax_security_nonce', 'security' );
+            $post_args = filter_input_array(INPUT_POST);
+            
+            $outcome_array                          = array();
+            $outcome_array['image_url']             = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' . $post_args['result'] . '_image_url', true);
+            $outcome_array['outcome_title']         = get_post_meta($post_args['post_ID'], 'wp_quizr_outcomes_title_' . $post_args['result'] . '', true);
+            $outcome_array['outcome_description']   = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' . $post_args['result'] . '_description', true);
+            $outcome_array['outcome_link']          = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' . $post_args['result'] . '_url', true);
 
-            /* Get the saved meta values, if any. */
-            $wp_quizr_saved_outcome_image_url_meta_value = get_post_meta($_REQUEST['post_ID'], 'wp_quizr_outcome_' . $_REQUEST['result'] . '_image_url', true);
-
-            $wp_quizr_saved_outcome_description = get_post_meta($_REQUEST['post_ID'], 'wp_quizr_outcome_' . $_REQUEST['result'] . '_description', true);
-
-            $wp_quizr_saved_outcome_url = get_post_meta($_REQUEST['post_ID'], 'wp_quizr_outcome_' . $_REQUEST['result'] . '_url', true);
-
-            $wp_quizr_saved_outcomes_title_meta_value = get_post_meta($_REQUEST['post_ID'], 'wp_quizr_outcomes_title_' . $_REQUEST['result'] . '', true);
-
-            $outcome_json = json_encode(array('image_url' => $wp_quizr_saved_outcome_image_url_meta_value, 'outcome_title' => $wp_quizr_saved_outcomes_title_meta_value, 'outcome_description' => $wp_quizr_saved_outcome_description, 'outcome_link' => $wp_quizr_saved_outcome_url));
-
+            $outcome_json = json_encode( $outcome_array );
             echo $outcome_json;
 
-            die();
+            wp_die();
 
         }
         
@@ -272,14 +270,13 @@ class WP_Quizr_Public {
         public function wp_quizr_add_meta_tags() {
 
             global $post;
+            
+                if( is_object( $post ) ):
+                    if (has_shortcode($post->post_content, 'wp_quizr')) {
+                            require_once plugin_dir_path( __FILE__ ) . 'partials/wp_quizr_add_meta_tags.php';
+                    }                    
+                endif;
 
-            if (has_shortcode($post->post_content, 'wp_quizr')) {
-
-                    $wp_quizr_options = get_option('wp_quizr_options');
-
-                    require_once plugin_dir_path( __FILE__ ) . 'partials/wp_quizr_add_meta_tags.php';
-
-            }
         }
         
         
@@ -289,26 +286,15 @@ class WP_Quizr_Public {
         */     
         public function wp_quizr_add_custom_css() {
 
-            global $post;
-
-            $wp_quizr_options = get_option('wp_quizr_options');
-
-            $wp_quizr_custom_css = $wp_quizr_options['option_custom_css'];
-
-            if($wp_quizr_options['option_custom_css']) {
-
-                ?>
+            if( $wp_quizr_options = get_option( 'wp_quizr_options' ) ): ?>
 
                     <style type="text/css" lang="engl">
-
                         <?php echo $wp_quizr_options['option_custom_css'];?>
-
-                    </style>    
-
-                <?php
+                    </style>  
+                    
+            <?php endif;
 
             }
-
-        }        
+      
 
 }

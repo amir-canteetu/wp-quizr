@@ -2,8 +2,7 @@
 
 p {
     
-    border: 1px solid #DDD;
-    
+    border: 1px solid #DDD;    
     padding: 10px 10px 20px;
     
 }
@@ -47,3 +46,4 @@ p.shortcode_notice, p.metabox-p {
     padding: 0;
     border: none;
 }
+

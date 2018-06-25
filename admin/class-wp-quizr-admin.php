@@ -105,8 +105,8 @@ class WP_Quizr_Admin {
          * @since 1.0.0
          */    
         public function wp_quizr_create_settings_submenu() {
-
-            add_options_page('WP Quizr Settings Page', 'WP Quizr Settings', 'manage_options', 'wp_quizr_settings_menu', 'WP_Quizr_Admin::wp_quizr_display_settings_page');
+            //                parent_slug   page_title                menu_title          capability          menu_slug                   function
+            add_submenu_page('edit.php?post_type=wp_quizr', 'WP Quizr Settings Page', 'WP Quizr Settings', 'manage_options', 'wp_quizr_settings_menu', 'WP_Quizr_Admin::wp_quizr_display_settings_page');
 
             //call register settings function
             add_action('admin_init', 'WP_Quizr_Admin::wp_quizr_register_settings');
@@ -183,10 +183,10 @@ class WP_Quizr_Admin {
             $wp_quizr_options = get_option('wp_quizr_options');
             
             /*Check if app IDs have been submitted; if so, show metaboxes*/
-            if (!($wp_quizr_options['option_fb_id']) && !($wp_quizr_options['option_twtr_handle'])) {
-
+            if ((empty($wp_quizr_options['option_fb_id'])) && (empty($wp_quizr_options['option_twtr_handle']))) {
+                
             /* If no social id given, remind user to submit them. */
-            add_action('add_meta_boxes_wp_quizr', array( $this, 'wp_quizr_remind_about_social_IDs')); 
+           
             
             }
             
@@ -686,13 +686,13 @@ class WP_Quizr_Admin {
         */ 
         public function wp_quizr_remind_about_social_IDs() {
 
-            add_meta_box('social_ids_notice', esc_html__('Important Notice:', 'wp-quizr'), array( $this,'wp_quizr_display_social_ids_reminder'), 'wp_quizr', 'normal', 'default');
+            add_meta_box('social_ids_notice', esc_html__('Important Notice:', 'wp-quizr'), array( $this,'wp_quizr_display_social_ids_reminder'), 'wp_quizr', 'normal', 'high');
 
         }
 
         /* Display meta box with social IDs reminder. */
         public function wp_quizr_display_social_ids_reminder () {
-
+            
             require_once plugin_dir_path( __FILE__ ) . 'partials/wp-quizr-display-social-ids-reminder.php';
 
         }

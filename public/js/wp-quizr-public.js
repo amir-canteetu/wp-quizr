@@ -32,15 +32,14 @@
                               $('#see-results-container').removeClass('hide');
                               $('#ajax-loader').removeClass('hide');
 
-
                         var frequency = {},  // object of frequency.
                         max = 0,  // holds the max frequency.
                         result;   // holds the max frequency element.
                         for(var v in results) {
-                            frequency[results[v]]=(frequency[results[v]] || 0)+1; // increment frequency.
-                            if(frequency[results[v]] > max) { // is this frequency > max so far ?
-                                max = frequency[results[v]];  // update max.
-                                result = results[v];          // update result.
+                            frequency[results[v]] = ( frequency[results[v]] || 0 ) + 1; // increment frequency.
+                            if( frequency[results[v]] > max ) { // is this frequency > max so far ?
+                                max     = frequency[results[v]];  // update max.
+                                result  = results[v];          // update result.
                             }
                         }
 
@@ -50,15 +49,17 @@
 
                         // Prepare Ajax data: action and post id
                         var data = {
-                            action: 'wp_quizr_ajax',
-                            post_ID: post_ID,
-                            result: result
+                            action      :   'wp_quizr_ajax',
+                            post_ID     :   post_ID,
+                            security    :   wp_quizr_js_data.security,
+                            result      :   result
                         };
 
                         $.ajax({
-                            url: wp_quizr_js_data.ajaxurl,
-                            data: data,
-                            dataType : "json",
+                            type        : "post",
+                            url         : wp_quizr_js_data.ajaxurl,
+                            data        : data,
+                            dataType    : "json",
                             success: function(resp) {
 
                                $('#ajax-loader').addClass('hide');
