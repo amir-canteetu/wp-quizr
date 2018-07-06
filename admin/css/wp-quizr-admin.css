@@ -47,3 +47,19 @@ p.shortcode_notice, p.metabox-p {
     border: none;
 }
 
+.img_container {
+    position: relative;
+}
+
+.img_container a.remove-action{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 26px;
+    width: 26px; 
+background: #23282D;
+    color: #eee;
+border-radius: 100%;    
+    
+}
+

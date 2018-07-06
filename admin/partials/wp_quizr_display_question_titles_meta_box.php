@@ -23,7 +23,10 @@
     <br />
     <br />
     
-    <img style="max-width: 100%; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_title_' . $x. '_image_url', true)); ?>">   
+    <div class="img_container">
+        <a class="remove-action" href="#"></a>
+        <img style="max-width: 100%; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_title_' . $x. '_image_url', true)); ?>">
+    </div>    
     
     <input type="hidden" name="wp_quizr_question_title_<?php echo $x.'_image_url'; ?>" id="wp_quizr_question_title_<?php echo $x.'_image_url'; ?>" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_title_' . $x. '_image_url', true)); ?>" />
     
