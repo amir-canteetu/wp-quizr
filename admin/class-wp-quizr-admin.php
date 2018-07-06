@@ -92,7 +92,7 @@ class WP_Quizr_Admin {
             wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.js', array( 'jquery' ), $this->version, false );
 
             wp_localize_script('meta-box-image_script', 'meta_image', array(
-                    'title' => 'Choose or Upload an Image',
+                    'title' => 'Add Image',
                     'button' => 'Use this image',
                         )
                 ); 

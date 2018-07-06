@@ -25,13 +25,12 @@
     
     <img style="max-width: 100%; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_title_' . $x. '_image_url', true)); ?>">   
     
-    
     <input type="hidden" name="wp_quizr_question_title_<?php echo $x.'_image_url'; ?>" id="wp_quizr_question_title_<?php echo $x.'_image_url'; ?>" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_title_' . $x. '_image_url', true)); ?>" />
     
     <br />
     <br />
     
-    <input type="button" class ="wp_quizr_question_title_image_button" id="wp_quizr_question_title_<?php echo $x. '_image_button'; ?>" class="button" value="<?php esc_html_e('Choose or Upload an Image', 'wp-quizr'); ?>" />
+    <input type="button" class ="wp_quizr_question_title_image_button  button button-primary button-large" id="wp_quizr_question_title_<?php echo $x. '_image_button'; ?>" class="button" value="<?php esc_html_e('Add Image', 'wp-quizr'); ?>" />
     
     <br />
     <br />
