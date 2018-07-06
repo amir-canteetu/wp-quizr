@@ -18,6 +18,9 @@
  * @subpackage WP_Quizr/admin
  * @author     Amir Canteetu <amircanteetu@gmail.com>
  */
+
+defined( 'ABSPATH' ) || exit;
+
 class WP_Quizr_Admin {
 
         /**
@@ -274,15 +277,17 @@ class WP_Quizr_Admin {
             if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
                 return;
             } 
+            
+            $post_args = filter_input_array(INPUT_POST);
 
             /* Verify the nonce before proceeding. */
-            if (!isset($_POST['wp_quizr_nonce']) || !wp_verify_nonce($_POST['wp_quizr_nonce'], basename(__FILE__))) {
+            if (!isset($post_args['wp_quizr_nonce']) || !wp_verify_nonce($post_args['wp_quizr_nonce'], basename(__FILE__))) {
 
                 return $post_id;
             }
 
             /* Make sure the user has permissions to post */
-            if ( 'wp_quizr' == $_POST['post_type'] ) {
+            if ( 'wp_quizr' == $post_args['post_type'] ) {
                 if ( ! current_user_can( 'edit_post', $post_id ) ) {
                     return;
                 } 
@@ -299,7 +304,7 @@ class WP_Quizr_Admin {
 
              /* Process and save/update # of questions & outcomes info. */
 
-            $new_wp_quizr_number_of_outcomes = ( (isset($_POST['wp_quizr_number_of_outcomes']) && (is_numeric($_POST['wp_quizr_number_of_outcomes']))) ? $_POST['wp_quizr_number_of_outcomes'] : '' );
+            $new_wp_quizr_number_of_outcomes = ( (isset($post_args['wp_quizr_number_of_outcomes']) && (is_numeric($post_args['wp_quizr_number_of_outcomes']))) ? $post_args['wp_quizr_number_of_outcomes'] : '' );
 
             /* Get the saved meta values, if any. */
             $wp_quizr_saved_number_of_outcomes_meta_value = get_post_meta($post_id, 'wp_quizr_number_of_outcomes', true);
@@ -319,7 +324,7 @@ class WP_Quizr_Admin {
             }
 
 
-            $new_wp_quizr_number_of_questions = ( (isset($_POST['wp_quizr_number_of_questions']) && (is_numeric($_POST['wp_quizr_number_of_questions']))) ? $_POST['wp_quizr_number_of_questions'] : '' );
+            $new_wp_quizr_number_of_questions = ( (isset($post_args['wp_quizr_number_of_questions']) && (is_numeric($post_args['wp_quizr_number_of_questions']))) ? $post_args['wp_quizr_number_of_questions'] : '' );
 
             $wp_quizr_saved_number_of_questions_meta_value = get_post_meta($post_id, 'wp_quizr_number_of_questions', true);
 
@@ -346,7 +351,7 @@ class WP_Quizr_Admin {
 
             for ($x = 1; $x <= $number_of_outcomes; $x++) {
 
-                $new_wp_quizr_outcomes_title = ( (isset($_POST['wp_quizr_outcomes_title_' . $x]) && (is_string($_POST['wp_quizr_outcomes_title_' . $x]))) ? $_POST['wp_quizr_outcomes_title_' . $x] : '' );
+                $new_wp_quizr_outcomes_title = ( (isset($post_args['wp_quizr_outcomes_title_' . $x]) && (is_string($post_args['wp_quizr_outcomes_title_' . $x]))) ? $post_args['wp_quizr_outcomes_title_' . $x] : '' );
 
                 /* Get the saved meta values, if any. */
                 $wp_quizr_saved_outcomes_title_meta_value = get_post_meta($post_id, 'wp_quizr_outcomes_title_' . $x, true);
@@ -382,7 +387,7 @@ class WP_Quizr_Admin {
             for ($x = 1; $x <= $number_of_questions; $x++) {
 
                 /* Get new values from form POST, if any.*/
-                $new_wp_quizr_show_question_text = ( (isset($_POST['wp_quizr_show_question_' . $x . '_text'])) ? $_POST['wp_quizr_show_question_' . $x . '_text'] : '1' );            
+                $new_wp_quizr_show_question_text = ( (isset($post_args['wp_quizr_show_question_' . $x . '_text'])) ? $post_args['wp_quizr_show_question_' . $x . '_text'] : '1' );            
 
                 /* Get the saved meta values, if any. */
                 $wp_quizr_show_question_text_meta_value = get_post_meta($post_id, 'wp_quizr_show_question_' . $x . '_text', true);
@@ -396,7 +401,7 @@ class WP_Quizr_Admin {
 
 
                 /* Get new values from form POST, if any. */
-                $new_wp_quizr_question_title_image_url = ( (isset($_POST['wp_quizr_question_title_' . $x . '_image_url']) && (is_string($_POST['wp_quizr_question_title_' . $x . '_image_url']))) ? $_POST['wp_quizr_question_title_' . $x . '_image_url'] : '' );            
+                $new_wp_quizr_question_title_image_url = ( (isset($post_args['wp_quizr_question_title_' . $x . '_image_url']) && (is_string($post_args['wp_quizr_question_title_' . $x . '_image_url']))) ? $post_args['wp_quizr_question_title_' . $x . '_image_url'] : '' );            
 
                 /* Get the saved meta values, if any. */
                 $wp_quizr_saved_question_title_image_url_meta_value = get_post_meta($post_id, 'wp_quizr_question_title_' . $x . '_image_url', true);
@@ -415,7 +420,7 @@ class WP_Quizr_Admin {
 
 
                 /* Get new values from form POST, if any. */
-                $new_wp_quizr_question_title = ( (isset($_POST['wp_quizr_question_title_' . $x ]) && (is_string($_POST['wp_quizr_question_title_' . $x]))) ? $_POST['wp_quizr_question_title_' . $x] : '' );
+                $new_wp_quizr_question_title = ( (isset($post_args['wp_quizr_question_title_' . $x ]) && (is_string($post_args['wp_quizr_question_title_' . $x]))) ? $post_args['wp_quizr_question_title_' . $x] : '' );
 
                 /* Get the saved meta values, if any. */
                 $wp_quizr_saved_question_title_meta_value = get_post_meta($post_id, 'wp_quizr_question_title_' . $x, true);
@@ -446,11 +451,11 @@ class WP_Quizr_Admin {
 
             for ($x = 1; $x <= $number_of_outcomes_titles_input; $x++) {
 
-                $new_wp_quizr_outcome_image_url = ( (isset($_POST['wp_quizr_outcome_' . $x . '_image_url']) && (is_string($_POST['wp_quizr_outcome_' . $x . '_image_url']))) ? $_POST['wp_quizr_outcome_' . $x . '_image_url'] : '' );
+                $new_wp_quizr_outcome_image_url = ( (isset($post_args['wp_quizr_outcome_' . $x . '_image_url']) && (is_string($post_args['wp_quizr_outcome_' . $x . '_image_url']))) ? $post_args['wp_quizr_outcome_' . $x . '_image_url'] : '' );
 
-                $new_wp_quizr_outcome_description = ( (isset($_POST['wp_quizr_outcome_' . $x . '_description']) && (is_string($_POST['wp_quizr_outcome_' . $x . '_description']))) ? $_POST['wp_quizr_outcome_' . $x . '_description'] : '' );
+                $new_wp_quizr_outcome_description = ( (isset($post_args['wp_quizr_outcome_' . $x . '_description']) && (is_string($post_args['wp_quizr_outcome_' . $x . '_description']))) ? $post_args['wp_quizr_outcome_' . $x . '_description'] : '' );
 
-                $new_wp_quizr_outcome_url = ( (isset($_POST['wp_quizr_outcome_' . $x . '_url']) && (is_string($_POST['wp_quizr_outcome_' . $x . '_url']))) ? $_POST['wp_quizr_outcome_' . $x . '_url'] : '' );
+                $new_wp_quizr_outcome_url = ( (isset($post_args['wp_quizr_outcome_' . $x . '_url']) && (is_string($post_args['wp_quizr_outcome_' . $x . '_url']))) ? $post_args['wp_quizr_outcome_' . $x . '_url'] : '' );
 
 
                 /* Get the saved meta values, if any. */
@@ -487,7 +492,7 @@ class WP_Quizr_Admin {
 
                 for ($y = 1; $y <= $number_of_outcomes_titles_input; $y++) {
 
-                    $new_wp_quizr_question_outcome_image_url = ( (isset($_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url']) && (is_string($_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url']))) ? $_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url'] : '' );
+                    $new_wp_quizr_question_outcome_image_url = ( (isset($post_args['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url']) && (is_string($post_args['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url']))) ? $post_args['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url'] : '' );
 
                     /* Get the saved meta values, if any. */
                     $wp_quizr_saved_question_outcome_image_url_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_url', true);
@@ -506,7 +511,7 @@ class WP_Quizr_Admin {
 
                     }
 
-                    $new_wp_quizr_question_outcome_image_caption = ( (isset($_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption']) && (is_string($_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption']))) ? $_POST['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption'] : '' );
+                    $new_wp_quizr_question_outcome_image_caption = ( (isset($post_args['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption']) && (is_string($post_args['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption']))) ? $post_args['wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption'] : '' );
 
                     /* Get the saved meta values, if any. */
                     $wp_quizr_saved_question_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_outcome_' . $y . '_image_caption', true);                    
@@ -527,7 +532,7 @@ class WP_Quizr_Admin {
                     
                     
 
-                    $new_wp_quizr_question_no_outcome_image_caption = ( (isset($_POST['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption']) && (is_string($_POST['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption']))) ? $_POST['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption'] : '' );
+                    $new_wp_quizr_question_no_outcome_image_caption = ( (isset($post_args['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption']) && (is_string($post_args['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption']))) ? $post_args['wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption'] : '' );
 
                     /* Get the saved meta values, if any. */
                     $wp_quizr_saved_question_no_outcome_image_caption_meta_value = get_post_meta($post_id, 'wp_quizr_question_' . $x . '_no_outcome_' . $y . '_image_caption', true);                    
@@ -547,7 +552,7 @@ class WP_Quizr_Admin {
                     }
                     
                     
-                    $new_wp_quizr_no_outcome_image_url = ( (isset($_POST['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url']) && (is_string($_POST['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url']))) ? $_POST['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url'] : '' );
+                    $new_wp_quizr_no_outcome_image_url = ( (isset($post_args['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url']) && (is_string($post_args['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url']))) ? $post_args['wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url'] : '' );
 
                     $wp_quizr_saved_no_outcome_image_url = get_post_meta($post->ID, 'wp_quizr_question_' . $x . '_no_outcome_image_' . $y . '_url', true);
 

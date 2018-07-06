@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * The plugin bootstrap file
  *
@@ -23,13 +25,6 @@
  * Text Domain:       wp_quizr
  * Domain Path:       /languages
  */
-
-    // If this file is called directly, abort.
-    if ( ! defined( 'WPINC' ) ) {
-
-            die;
-
-    }
 
     function activate_plugin_name() {
 
