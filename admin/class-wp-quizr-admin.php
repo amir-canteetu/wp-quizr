@@ -82,11 +82,11 @@ class WP_Quizr_Admin {
 
             if ('wp_quizr' === $post_type) {
 
-            wp_enqueue_script( 'wp-quizr-admin-js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-admin.min.js', array( 'jquery' ), $this->version, false );
+            wp_enqueue_script( 'wp-quizr-admin-js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-admin.js', array( 'jquery' ), $this->version, false );
 
             wp_enqueue_media();
 
-            wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.min.js', array( 'jquery' ), $this->version, false );
+            wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.js', array( 'jquery' ), $this->version, false );
 
             wp_localize_script('meta-box-image_script', 'meta_image', array(
                     'title' => 'Choose or Upload an Image',
@@ -207,13 +207,10 @@ class WP_Quizr_Admin {
 
             global $post;
 
-            $number_of_outcomes = esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_outcomes', true));
-
-            $number_of_questions = esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_questions', true));
-
-            $number_of_outcomes_titles_input = esc_attr(get_post_meta($post->ID, 'number_of_outcomes_titles_input', true));
-
-            $number_of_question_titles_input = esc_attr(get_post_meta($post->ID, 'number_of_question_titles_input', true));
+            $number_of_outcomes                 = esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_outcomes', true));
+            $number_of_questions                = esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_questions', true));
+            $number_of_outcomes_titles_input    = esc_attr(get_post_meta($post->ID, 'number_of_outcomes_titles_input', true));
+            $number_of_question_titles_input    = esc_attr(get_post_meta($post->ID, 'number_of_question_titles_input', true));
 
             //Add the number of questions and outcomes metabox unconditionally so these can be edited when needed on post page: add_meta_box( $id, $title, $callback, $screen, $context, $priority, $callback_args );
             add_meta_box('wp_quizr_number_of_questions_and_outcomes', esc_html__('Number Of Questions & Outcomes', 'wp-quizr'), array( $this, 'wp_quizr_display_number_of_questions_and_outcomes_meta_box'), 'wp_quizr', 'normal', 'default');
@@ -230,7 +227,6 @@ class WP_Quizr_Admin {
 
                     /* Get the saved outcome title. */
                     $wp_quizr_saved_outcomes_title_meta_value = get_post_meta($post->ID, 'wp_quizr_outcomes_title_' . $x, true);
-
                     add_meta_box('wp_quizr_outcomes_' . $x, esc_html__('Details For Outcome: ' . $wp_quizr_saved_outcomes_title_meta_value, 'wp-quizr'), array( $this,'wp_quizr_display_outcomes_meta_box'), 'wp_quizr', 'normal', 'default', array('$x' => $x, 'title' => $wp_quizr_saved_outcomes_title_meta_value));
 
                 }
@@ -244,7 +240,6 @@ class WP_Quizr_Admin {
 
                     /* Get the saved question title. */
                     $wp_quizr_saved_question_title_meta_value = get_post_meta($post->ID, 'wp_quizr_question_title_' . $x, true);
-
                     add_meta_box('wp_quizr_questions_' . $x, esc_html__('Answer Choices For Question: ' . $wp_quizr_saved_question_title_meta_value, 'wp-quizr'), array( $this,'wp_quizr_display_questions_meta_box'), 'wp_quizr', 'normal', 'default', array('$x' => $x, 'title' => $wp_quizr_saved_question_title_meta_value));
 
                 }
@@ -253,7 +248,6 @@ class WP_Quizr_Admin {
 
 
             //if the post ID is available, display the quizz's shortcode
-
             if ($post->ID !== null) {
 
                 //add_meta_box( $id, $title, $callback, $screen, $context, $priority, $callback_args );
@@ -485,8 +479,6 @@ class WP_Quizr_Admin {
 
 
             /* Process and save/update questions & answer image asssociation info. */
-
-            $number_of_question_titles_input = get_post_meta($post->ID, 'number_of_question_titles_input', true);
 
             /* Get the saved # of outcomes titles. */
             $number_of_outcomes_titles_input = get_post_meta($post->ID, 'number_of_outcomes_titles_input', true);

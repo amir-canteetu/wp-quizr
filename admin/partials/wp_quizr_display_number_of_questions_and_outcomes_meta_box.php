@@ -17,5 +17,7 @@
         <input class="widefat" type="number" name="wp_quizr_number_of_questions" id="wp_quizr_number_of_questions" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_number_of_questions', true)); ?>" size="20" />
     </p>   
     <div id="quiz-publishing-action">
-            <input type="submit" name="publish" id="publish" class="button button-primary button-large" value="Save" />
+        <span id="publish-quiz-q-o" class="button button-primary button-large">
+            Save
+        </span>
     </div>

@@ -2,7 +2,6 @@
 	
 
 	$(function() {
-	
         
             jQuery('img.add_no_assoc_img').click(function(event){
 
@@ -28,8 +27,13 @@
 
                 newRow.insertBefore(jQuery(this).parent().parent());
 
-            });        
-        
+            });
+            
+            $( "#publish-quiz-q-o" ).on( "click", function() {
+             
+                $( "#publish" ).trigger( "click" );
+             
+            });
         
 	});
 	
