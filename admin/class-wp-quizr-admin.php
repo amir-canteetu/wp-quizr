@@ -66,8 +66,10 @@ class WP_Quizr_Admin {
            global $post_type;
 
             if ('wp_quizr' === $post_type) {
-
-            wp_enqueue_style( 'wp_quizr_admin_css', plugin_dir_url( __FILE__ ) . 'css/wp-quizr-admin.css', array(), $this->version, 'all' );
+                
+                wp_enqueue_style( 'wp_quizr_admin_css', plugin_dir_url( __FILE__ ) . 'css/wp-quizr-admin.css', array(), $this->version, 'all' );
+                wp_enqueue_style( 'ballooncss', plugin_dir_url( __FILE__ ) . 'css/balloon.min.css', array(), '5.1.0', 'all' );
+                wp_enqueue_style( 'fontawesome', plugin_dir_url( __FILE__ ) . 'fonts/fontawesome/css/all.css', array(), '5.1.0', 'all' );
 
             }
 
@@ -95,7 +97,9 @@ class WP_Quizr_Admin {
                     'title' => 'Add Image',
                     'button' => 'Use this image',
                         )
-                ); 
+                );
+            
+            wp_enqueue_script( 'fontawesome', plugin_dir_url( __FILE__ ) . 'fonts/fontawesome/js/all.js', array(), '5.1.0', 'all' );
 
             }                
 
@@ -387,7 +391,7 @@ class WP_Quizr_Admin {
             for ($x = 1; $x <= $number_of_questions; $x++) {
 
                 /* Get new values from form POST, if any.*/
-                $new_wp_quizr_show_question_text = ( (isset($post_args['wp_quizr_show_question_' . $x . '_text'])) ? $post_args['wp_quizr_show_question_' . $x . '_text'] : '1' );            
+                $new_wp_quizr_show_question_text = ( (isset($post_args['wp_quizr_show_question_' . $x . '_text'])) ? $post_args['wp_quizr_show_question_' . $x . '_text'] : '0' );            
 
                 /* Get the saved meta values, if any. */
                 $wp_quizr_show_question_text_meta_value = get_post_meta($post_id, 'wp_quizr_show_question_' . $x . '_text', true);
@@ -626,7 +630,7 @@ class WP_Quizr_Admin {
 
                 $wp_quizr_show_question_text_meta_value = get_post_meta($post->ID, 'wp_quizr_show_question_' . $x . '_text', true);
 
-                $wp_quizr_show_question_text_selected = ($wp_quizr_show_question_text_meta_value == 1) ? 'selected="selected"' : '' ;
+                $wp_quizr_show_question_text_selected   = !empty($wp_quizr_show_question_text_meta_value) ? 'selected="selected"' : '' ;
 
                 require plugin_dir_path( __FILE__ ) . 'partials/wp_quizr_display_question_titles_meta_box.php';
 

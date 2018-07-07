@@ -1,12 +1,5 @@
 
 
-p {
-    
-    border: 1px solid #DDD;    
-    padding: 10px 10px 20px;
-    
-}
-
 .wp_quizr_question_outcome_image_button, .wp_quizr_outcome_image_button, .wp_quizr_question_outcome_remove_img_button, .wp_quizr_question_title_image_button, .wp_quizr_question_title_image_remove_img_button {
     color: #555;
 border-color: #ccc;
@@ -49,6 +42,7 @@ p.shortcode_notice, p.metabox-p {
 
 .img_container {
     position: relative;
+    display: inline-block;
 }
 
 .img_container a.remove-action{
@@ -57,9 +51,20 @@ p.shortcode_notice, p.metabox-p {
     right: 0;
     height: 26px;
     width: 26px; 
-background: #23282D;
-    color: #eee;
-border-radius: 100%;    
-    
+    color: red;
+    border-radius: 100%;    
+   text-decoration: none;
+   display: none;
+}
+
+.wp_quizr_questions_container {
+    padding: 15px;
+    border: #DFDFDF solid 1px;
+}
+
+.wp_quizr_questions_container .wp_quizr_question_titles, 
+.wp_quizr_questions_container .wp_quizr_show_question,
+.wp_quizr_questions_container .img_container {
+    margin: 15px 0 15px 0;
 }
 
