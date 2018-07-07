@@ -64,7 +64,14 @@ p.shortcode_notice, p.metabox-p {
 
 .wp_quizr_questions_container .wp_quizr_question_titles, 
 .wp_quizr_questions_container .wp_quizr_show_question,
-.wp_quizr_questions_container .img_container {
+.wp_quizr_questions_container .img_container,
+.wp_quizr_outcomes_container .img_container,
+.wp_quizr_outcomes_container label
+{
     margin: 15px 0 15px 0;
+}
+
+.wp_quizr_outcomes_container label {
+    display: block;
 }
 

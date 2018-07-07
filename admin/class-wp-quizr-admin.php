@@ -70,6 +70,8 @@ class WP_Quizr_Admin {
                 wp_enqueue_style( 'wp_quizr_admin_css', plugin_dir_url( __FILE__ ) . 'css/wp-quizr-admin.css', array(), $this->version, 'all' );
                 wp_enqueue_style( 'ballooncss', plugin_dir_url( __FILE__ ) . 'css/balloon.min.css', array(), '5.1.0', 'all' );
                 wp_enqueue_style( 'fontawesome', plugin_dir_url( __FILE__ ) . 'fonts/fontawesome/css/all.css', array(), '5.1.0', 'all' );
+                
+                //wp_enqueue_style( 'bootstrapcss', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', array(), '4.0.0', 'all' );
 
             }
 

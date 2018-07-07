@@ -15,11 +15,11 @@
                 <label><?php esc_html_e('Image For Outcome: ' . $wp_quizr_saved_outcomes_title_meta_value, 'wp-quizr'); ?></label>
                 <br />
                 <br />
-                <img style="max-width: 100%; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_outcome_' . $y . '_image_url', true)); ?>"> 
+                <img style="max-width: 300px; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_outcome_' . $y . '_image_url', true)); ?>"> 
                 <input type="hidden" name="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_image_url'; ?>" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_image_url'; ?>" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_outcome_' . $y . '_image_url', true)); ?>" />
                 <br />
                 <br />
-                <input type="button" class ="wp_quizr_question_outcome_image_button" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_image_button'; ?>" class="button" value="Add Image" />
+                <input type="button" class ="wp_quizr_question_outcome_image_button add_img_btn" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_image_button'; ?>" class="button" value="Add Image" />
                 <br />
                 <br />
                 <input type="button" class ="wp_quizr_question_outcome_remove_img_button" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_outcome_' . $y . '_remove_img_button'; ?>" class="button" value="Remove Image" />
@@ -44,11 +44,11 @@
                     <label><?php esc_html_e('Image For No Outcome', 'wp-quizr'); ?></label>
                     <br />
                     <br />
-                    <img style="max-width: 100%; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>"> 
+                    <img style="max-width: 300px; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>"> 
                     <input type="hidden" name="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_url'; ?>" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_url'; ?>" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>" />
                     <br />
                     <br />
-                    <input type="button" class ="wp_quizr_question_outcome_image_button" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_button'; ?>" class="button" value="Add Image" />        
+                    <input type="button" class ="wp_quizr_question_outcome_image_button add_img_btn" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_button'; ?>" class="button" value="Add Image" />        
                     <br>
                     <br>
                     <input type="button" class="wp_quizr_question_outcome_remove_img_button" value="Remove Image">

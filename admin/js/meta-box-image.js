@@ -7,7 +7,7 @@ jQuery(document).ready(function($){
     var meta_image_frame;
  
     // Runs when the image button is clicked.
-    $('.wp_quizr_outcome_image_button, .wp_quizr_question_outcome_image_button, .wp_quizr_question_title_image_button').on("click", function(e){
+    $('.add_img_btn').on("click", function(e){
         
                 //just in case a global of the same name exists.
                 if(typeof $this !== 'undefined') {
@@ -53,22 +53,22 @@ jQuery(document).ready(function($){
     
     $('a.remove-action').on("click", function(e){
         
-        e.preventDefault();
+                e.preventDefault();
 
-        if(typeof $this !== 'undefined') {
-         var $that = $this;   
-        } 
-        
-        $this = $(this);
-        
-        $this.hide();
-        $this.siblings( "img" ).attr( "src", "" );
-        $this.parent( ".img_container" ).siblings('input.img_url').attr( {"value":""} );
-        $this.parent( ".img_container" ).siblings('input.img_url').attr( "imgid", '' );
-        
-        $this.parent( ".img_container" ).siblings('.add_img_btn').show( );
-        
-        $this = $that;
+                if(typeof $this !== 'undefined') {
+                 var $that = $this;   
+                } 
+
+                $this = $(this);
+
+                $this.hide();
+                $this.siblings( "img" ).attr( "src", "" );
+                $this.parent( ".img_container" ).siblings('input.img_url').attr( {"value":""} );
+                $this.parent( ".img_container" ).siblings('input.img_url').attr( "imgid", '' );
+
+                $this.parent( ".img_container" ).siblings('.add_img_btn').show( );
+
+                $this = $that;
         
     });    
     
