@@ -7,7 +7,7 @@ jQuery(document).ready(function($){
     var meta_image_frame;
  
     // Runs when the image button is clicked.
-    $('.add_img_btn').on("click", function(e){
+    $('.postbox').on("click", ".add_img_btn", function(e) {
         
                 //just in case a global of the same name exists.
                 if(typeof $this !== 'undefined') {
@@ -51,7 +51,7 @@ jQuery(document).ready(function($){
                 meta_image_frame.open();
     });
     
-    $('a.remove-action').on("click", function(e){
+    $('.postbox').on("click", 'a.remove-action', function(e){
         
                 e.preventDefault();
 
@@ -72,7 +72,6 @@ jQuery(document).ready(function($){
         
     });    
     
-    
     $('.wp_quizr_question_outcome_remove_img_button, .wp_quizr_question_title_image_remove_img_button').on("click", function(e){
         $(this).prev().prev().prev().prev().prev().prev().prev().attr("src", "");
         $(this).prev().prev().prev().prev().prev().prev().attr({"id": "", "value":"", "name": ""});
@@ -84,6 +83,6 @@ jQuery(document).ready(function($){
         }, function() {
           $( this ).find( "a.remove-action" ).fadeOut(300);
         }
-    );   
+    ); 
     
 });

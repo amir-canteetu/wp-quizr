@@ -45,7 +45,7 @@ p.shortcode_notice, p.metabox-p {
     display: inline-block;
 }
 
-.img_container a.remove-action{
+.img_container a.remove-action {
     position: absolute;
     top: 0;
     right: 0;
@@ -57,6 +57,13 @@ p.shortcode_notice, p.metabox-p {
    display: none;
 }
 
+.img_container a.remove-action:link, 
+.img_container a.remove-action:visited, 
+.img_container a.remove-action:hover, 
+.img_container a.remove-action:active {
+      text-decoration: none; 
+}
+
 .wp_quizr_questions_container {
     padding: 15px;
     border: #DFDFDF solid 1px;
@@ -66,12 +73,29 @@ p.shortcode_notice, p.metabox-p {
 .wp_quizr_questions_container .wp_quizr_show_question,
 .wp_quizr_questions_container .img_container,
 .wp_quizr_outcomes_container .img_container,
-.wp_quizr_outcomes_container label
+.wp_quizr_outcomes_container label, .answer_choices_container label,
+.answer_choices_container .img_container,
+.wp_quizr_outcomes_container label,
+.answer_choices_container .image_caption,
+.no_outcome_container .image_caption
 {
     margin: 15px 0 15px 0;
 }
 
+.answer_choices_container .add_img_btn,
+.wp_quizr_questions_container .add_img_btn,
+.wp_quizr_outcomes_container .add_img_btn
+{
+    display: block;
+}
+
+.wp_quizr_outcomes_container label, 
+.answer_choices_container label,
 .wp_quizr_outcomes_container label {
     display: block;
+}
+
+img.add_no_assoc_img {
+    cursor: pointer;
 }
 

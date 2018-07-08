@@ -122,7 +122,7 @@ class WP_Quizr_Public {
             extract(shortcode_atts(array(), $atts));
 
             $post_id                            = $atts['id'];
-            $number_of_columns                  =  is_numeric($atts['columns']) ? $atts['columns'] : 2;
+            $number_of_columns                  = is_numeric($atts['columns']) ? $atts['columns'] : 2;
             $quiz_title                         = get_the_title( $post_id );
             $wp_quizr_options                   = get_option('wp_quizr_options');
             $table_width                        = $wp_quizr_options['option_table_width'] ? $wp_quizr_options['option_table_width']  : '100';
@@ -149,7 +149,7 @@ class WP_Quizr_Public {
                     //if question image exists, show it
                     if($wp_quizr_question_title_image_url) {
 
-                        $quiz_content .= '<tr><td colspan="'. $number_of_columns .'"><img src="'. $wp_quizr_question_title_image_url .'" class="question_title_image"></td></tr>';
+                        $quiz_content .= '<tr><td colspan="'. $number_of_columns .'"><img class="responsive" src="'. $wp_quizr_question_title_image_url .'" class="question_title_image"></td></tr>';
 
                     }
 
@@ -165,13 +165,13 @@ class WP_Quizr_Public {
                     
                     if ($wp_quizr_saved_question_outcome_image_url_meta_value) {
 
-                        $wp_quizr_cell_array[] = '<td>' . '<div class="quiz-img-contain notselected" data-id="' . $y . '">' . '<img src="' . $wp_quizr_saved_question_outcome_image_url_meta_value . '" class="quiz-img">' . '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_outcome_image_caption_meta_value .'</span></span></div>' . '</td>';
+                        $wp_quizr_cell_array[] = '<td>' . '<div class="quiz-img-contain notselected" data-id="' . $y . '">' . '<img class="responsive" src="' . $wp_quizr_saved_question_outcome_image_url_meta_value . '" class="quiz-img">' . '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_outcome_image_caption_meta_value .'</span></span></div>' . '</td>';
 
                     }
 
                     if ($wp_quizr_saved_no_outcome_image_url) {
 
-                        $wp_quizr_cell_array[]  = '<td>' . '<div class="quiz-img-contain notselected">' . '<img src="' . $wp_quizr_saved_no_outcome_image_url . '" class="quiz-img">' . '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_no_outcome_image_caption_meta_value .'</span></span></div>' . '</td>';
+                        $wp_quizr_cell_array[]  = '<td>' . '<div class="quiz-img-contain notselected">' . '<img class="responsive" src="' . $wp_quizr_saved_no_outcome_image_url . '" class="quiz-img">' . '<div class="quiz_checkbox_wrp"><span class="quiz_checkbox quiz-checkbox_unchecked"></span><span class="quiz_answer_text">'. $wp_quizr_saved_question_no_outcome_image_caption_meta_value .'</span></span></div>' . '</td>';
 
                     }
 
@@ -210,7 +210,7 @@ class WP_Quizr_Public {
             $quiz_content .= '<div class="img-desc-contain">
                                     <div class="pull-left">
                                         <a href="" class="outcome_image_link">
-                                            <img id="answer-img-result" src="">
+                                            <img class="responsive" id="answer-img-result" src="">
                                         </a>
                                     </div>';
 

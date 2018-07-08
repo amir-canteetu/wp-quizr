@@ -544,3 +544,8 @@ a.twitter-share {
   content: "\f09a";
 }
 
+.responsive {
+    width: 100%;
+    height: auto;
+}
+

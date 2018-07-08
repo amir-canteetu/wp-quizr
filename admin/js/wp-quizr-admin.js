@@ -3,29 +3,26 @@
 
 	$(function() {
         
-            jQuery('img.add_no_assoc_img').click(function(event){
+            $('img.add_no_assoc_img').on( "click", function(e) {
 
-                var wp_quizr_question_number = jQuery(this).attr('question-number'),
+                var wp_quizr_question_number = $(this).attr('question-number'),
 
-                wp_quizr_number_of_outcomes = jQuery(this).attr('number_of_outcomes'),
+                wp_quizr_number_of_outcomes = $(this).attr('number_of_outcomes'),
 
                 counter = 1;
 
-                event.preventDefault();
+                e.preventDefault();
 
                 for (x = 1; x <=wp_quizr_number_of_outcomes; x++ ) {
 
-                 if(jQuery('#wp_quizr_question_'+wp_quizr_question_number+'_no_outcome_image_'+x+'_url').length) {
-
-                    counter++;
-
+                    if($('#wp_quizr_question_'+wp_quizr_question_number+'_no_outcome_image_'+x+'_url').length) {
+                       counter++;
                     }
 
                 }
 
-                var newRow = jQuery('<p><label>Image For No Outcome</label><br><br><img style="max-width: 100%; height: auto;" src=""><input type="hidden" name="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_image_' + counter + '_url" id="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_image_' + counter + '_url" value=""><br><br><input type="button" class="wp_quizr_question_outcome_image_button" id="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_image_' + counter + '_button" value="Add Image"><br><br><input type="button" class="wp_quizr_question_outcome_remove_img_button" value="Remove Image"><br><br><input class="widefat" type="text" name="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_' + counter + '_image_caption" id="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_' + counter + '_image_caption" placeholder="Image Caption" value="" size="30"></p>');
-
-                newRow.insertBefore(jQuery(this).parent().parent());
+                var newRow = $('<div class="no_outcome_container"><label>Image For No Outcome:</label><div class="img_container"><a class="remove-action"  data-balloon="Remove" data-balloon-pos="up" href="#"><i class="fas fa-times fa-2x"></i></a><img style="max-width: 300px; height: auto;" src=""></div><input type="hidden" class="img_url" name="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_image_' + counter + '_url" id="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_image_' + counter + '_url" value=""><input type="button" class="add_img_btn button button-primary button-large wp_quizr_question_outcome_image_button" id="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_image_' + counter + '_button" value="Add Image"><input class="widefat image_caption" type="text" name="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_' + counter + '_image_caption" id="wp_quizr_question_' + wp_quizr_question_number + '_no_outcome_' + counter + '_image_caption" placeholder="Image Caption" value="" size="30"></div>');
+                newRow.insertBefore($(this).parent().parent());
 
             });
             
