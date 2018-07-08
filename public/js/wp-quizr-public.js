@@ -31,12 +31,7 @@
                                 };                                
                                 
                             };
-                            
-                            
-                            
-                           
-                            
-
+ 
                             if (remaining_questions === 0) {
 
                                       $('#see-results-container').removeClass('hide');

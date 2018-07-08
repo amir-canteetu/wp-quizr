@@ -72,11 +72,6 @@ jQuery(document).ready(function($){
         
     });    
     
-    $('.wp_quizr_question_outcome_remove_img_button, .wp_quizr_question_title_image_remove_img_button').on("click", function(e){
-        $(this).prev().prev().prev().prev().prev().prev().prev().attr("src", "");
-        $(this).prev().prev().prev().prev().prev().prev().attr({"id": "", "value":"", "name": ""});
-    });
-    
     $( "div.img_container" ).hover(
         function() {
           $( this ).find( "a.remove-action" ).fadeIn(300);

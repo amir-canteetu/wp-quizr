@@ -67,7 +67,7 @@ class WP_Quizr_Admin {
 
             if ('wp_quizr' === $post_type) {
                 
-                wp_enqueue_style( 'wp_quizr_admin_css', plugin_dir_url( __FILE__ ) . 'css/wp-quizr-admin.css', array(), $this->version, 'all' );
+                wp_enqueue_style( 'wp_quizr_admin_css', plugin_dir_url( __FILE__ ) . 'css/wp-quizr-admin.min.css', array(), $this->version, 'all' );
                 wp_enqueue_style( 'ballooncss', plugin_dir_url( __FILE__ ) . 'css/balloon.min.css', array(), '5.1.0', 'all' );
                 wp_enqueue_style( 'fontawesome', plugin_dir_url( __FILE__ ) . 'fonts/fontawesome/css/all.css', array(), '5.1.0', 'all' );
                 
@@ -89,11 +89,11 @@ class WP_Quizr_Admin {
 
             if ('wp_quizr' === $post_type) {
 
-            wp_enqueue_script( 'wp-quizr-admin-js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-admin.js', array( 'jquery' ), $this->version, false );
+            wp_enqueue_script( 'wp-quizr-admin-js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-admin.min.js', array( 'jquery' ), $this->version, false );
 
             wp_enqueue_media();
 
-            wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.js', array( 'jquery' ), $this->version, false );
+            wp_enqueue_script( 'meta-box-image-js', plugin_dir_url( __FILE__ ) . 'js/meta-box-image.min.js', array( 'jquery' ), $this->version, false );
 
             wp_localize_script('meta-box-image_script', 'meta_image', array(
                     'title' => 'Add Image',

@@ -47,8 +47,14 @@
             
                     <label><?php esc_html_e('Image For No Outcome:', 'wp-quizr'); ?></label>
 
-                    <img style="max-width: 300px; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>"> 
-                    <input type="hidden" name="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_url'; ?>" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_url'; ?>" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>" />
+                    <div class="img_container">
+                        <a class="remove-action"  data-balloon="Remove" data-balloon-pos="up" href="#">
+                            <i class="fas fa-times fa-2x"></i>
+                        </a>
+                        <img style="max-width: 300px; height: auto;" src="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>">
+                    </div> 
+                    
+                    <input type="hidden" class="img_url" name="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_url'; ?>" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_url'; ?>" value="<?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)); ?>" />
 
                     <input type="button" style="display: <?php echo esc_attr(get_post_meta($post->ID, 'wp_quizr_question_' . $box['args']['$x'] . '_no_outcome_image_' . $y . '_url', true)) ? 'none' : 'inline-block' ?>" class ="wp_quizr_question_outcome_image_button add_img_btn button button-primary button-large" id="wp_quizr_question_<?php echo $box['args']['$x'] . '_no_outcome_image_' . $y . '_button'; ?>" value="Add Image" />        
                  

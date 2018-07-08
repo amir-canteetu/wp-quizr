@@ -60,7 +60,7 @@ class WP_Quizr_Public {
                     /* Load only if custom type "wp_quizr" is being viewed */  
                     if (has_shortcode($post->post_content, 'wp_quizr')) {
 
-                        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-quizr-public.css', array(), $this->version, 'all' );
+                        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-quizr-public.min.css', array(), $this->version, 'all' );
 
                     }                    
                 endif;
@@ -81,7 +81,7 @@ class WP_Quizr_Public {
                     /* Load only if custom type "wp_quizr" is being viewed */  
                     if (has_shortcode($post->post_content, 'wp_quizr')) {
 
-                        wp_enqueue_script( 'wp_quizr_js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-public.js', array( 'jquery' ), $this->version, false );
+                        wp_enqueue_script( 'wp_quizr_js', plugin_dir_url( __FILE__ ) . 'js/wp-quizr-public.min.js', array( 'jquery' ), $this->version, false );
 
                         /* Get current page protocol */
                         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
