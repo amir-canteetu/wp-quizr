@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * Plugin Name:       WP Quizr
  * Plugin URI:        https://wordpress.org/plugins/wp-quizr/
  * Description:       Create Buzzfeed-style quizzes and allow users to share their results on social media.
- * Version:           1.2.0
+ * Version:           2.0.0
  * Author:            Amir Canteetu
  * Author URI:        https://github.com/amir-canteetu
  * License:           GPL-2.0+

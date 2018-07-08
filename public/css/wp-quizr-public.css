@@ -45,7 +45,7 @@ and open the template in the editor.
     margin: 60px auto 20px auto;
 }
 .quiz-result-container {
-    width: 625px;
+    width: 100%;
     margin: 30px auto 30px auto;
       border: 1px solid #dddddd;
 }
@@ -81,15 +81,21 @@ padding-bottom: 35px;
     letter-spacing: 1px;
     text-align: center;
 }
+
+a.outcome_image_link, a.outcome_image_link:active, a.outcome_image_link:focus, a.outcome_image_link:hover {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    color: transparent;
+}
 p.quiz-title {
     margin-bottom: 5px;
-  padding-left: 10px;
-  padding-top: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 .quiz-result-container #share-buttons {
     text-align: center;
     margin: 10px auto 30px auto;
-    width: 620px;
+    width: 100%;
 }
 
 #share-buttons a {
@@ -109,15 +115,13 @@ p.quiz-title {
     margin-left: 10px;
 }
 .quiz-result-container .img-desc-contain {
-margin: 10px 0 15px 0;
-  padding: 10px;
-  display: inline-block;
+    margin: 10px 0 15px 0;
+    padding: 10px;
+    display: inline-block;
 }
-#answer-img-result {
-    width: 300px;
-}
+
 .img-desc-contain .desc {
-    margin-left: 330px;
+    padding: 5px;
 }
 .img-desc-contain #description {
     font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
@@ -471,9 +475,9 @@ div.quiz_checkbox_wrp {
 }
 
 #share-buttons a  {
-    width: 200px;
+    width: 30%;
     height: 45px;
-    display: block;
+    display:inline-block;
     padding-top: 3px;
 }
 

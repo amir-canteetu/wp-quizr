@@ -59,7 +59,7 @@ class WP_Quizr {
 
 		$this->plugin_name = 'wp_quizr';
                 
-		$this->version = '1.2.0';
+		$this->version = '2.0.0';
                 
                 add_action('init', array($this, 'wp_quizr_add_custom_post_type'));
                 

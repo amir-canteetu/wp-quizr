@@ -143,7 +143,7 @@ class WP_Quizr_Public {
 
                 $quiz_content .= $wp_quizr_show_question_text_meta_value ? '<h4 class="quiz-question-title">' . $question_title . '</h4>' : '';
 
-                $quiz_content .= '<table class="quiz-table-listing">';
+                $quiz_content .= '<table class="quiz-table-listing" id="quiz_question_' . $x . '">';
 
                 $quiz_content .= '<tbody class="quiz-question">';
                     //if question image exists, show it
@@ -201,18 +201,16 @@ class WP_Quizr_Public {
 
             $quiz_content .= '<div id="ajax-loader" class="hide"></div>';
 
-            $quiz_content .= '<div class="quiz-result-container hide" style="width:' .$table_width.'">';
+            $quiz_content .= '<div class="quiz-result-container hide" id="quiz-result-container" style="width:' .$table_width.'%">';
 
             $quiz_content .= '<p class="quiz-title"><span class="quiz-title">'. $quiz_title .'</span></p>';        
 
             $quiz_content .= '<p class="quiz-results-p"><span class="you-got">You Got:</span><span class="you-got-answer"></span></p>';
 
             $quiz_content .= '<div class="img-desc-contain">
-                                    <div class="pull-left">
                                         <a href="" class="outcome_image_link">
                                             <img class="responsive" id="answer-img-result" src="">
-                                        </a>
-                                    </div>';
+                                        </a>';
 
             $quiz_content .= '<div class="desc">
                                     <p id="description"></p>
@@ -252,10 +250,10 @@ class WP_Quizr_Public {
             $post_args = filter_input_array(INPUT_POST);
             
             $outcome_array                          = array();
-            $outcome_array['image_url']             = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' . $post_args['result'] . '_image_url', true);
+            $outcome_array['image_url']             = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' .        $post_args['result'] . '_image_url', true);
             $outcome_array['outcome_title']         = get_post_meta($post_args['post_ID'], 'wp_quizr_outcomes_title_' . $post_args['result'] . '', true);
-            $outcome_array['outcome_description']   = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' . $post_args['result'] . '_description', true);
-            $outcome_array['outcome_link']          = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' . $post_args['result'] . '_url', true);
+            $outcome_array['outcome_description']   = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' .        $post_args['result'] . '_description', true);
+            $outcome_array['outcome_link']          = get_post_meta($post_args['post_ID'], 'wp_quizr_outcome_' .        $post_args['result'] . '_url', true);
 
             $outcome_json = json_encode( $outcome_array );
             echo $outcome_json;
